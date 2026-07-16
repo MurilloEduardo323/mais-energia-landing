@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mais Energia Academia de Karatê — Matrículas Abertas em Palmas</title>
+<meta name="description" content="Academia de Karatê Mais Energia, em Palmas-TO. Federada à FEKTO. Turmas infantil e adulto. Aula experimental grátis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sumi:#0a0a0b;
+    --sumi-2:#151517;
+    --sumi-3:#1e1f22;
+    --washi:#f2ede2;
+    --washi-2:#e8e0cf;
+    --hinomaru:#c8202b;
+    --hinomaru-deep:#8f151d;
+    --gold:#c69a3a;
+    --text-light:#efeadf;
+    --text-muted:#9d998e;
+    --text-dark:#1a1815;
+    --line:rgba(239,234,223,0.12);
+
+    --display: 'Bebas Neue', sans-serif;
+    --head: 'Oswald', sans-serif;
+    --body: 'Inter', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+
+    --belt-white:#f2ede2;
+    --belt-yellow:#e3b93c;
+    --belt-orange:#d97730;
+    --belt-green:#3d7a4e;
+    --belt-blue:#2e6197;
+    --belt-purple:#6d4a8f;
+    --belt-brown:#6b4527;
+    --belt-black:#0a0a0b;
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sumi);
+    color:var(--text-light);
+    font-family:var(--body);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  img,svg{display:block;max-width:100%;}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;}
+  button{font:inherit;cursor:pointer;border:none;background:none;color:inherit;}
+  .container{max-width:1180px;margin:0 auto;padding:0 24px;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+    color:var(--hinomaru);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-weight:600;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;height:1px;
+    background:var(--hinomaru);
+    display:inline-block;
+  }
+  h1,h2,h3,h4{font-family:var(--head);font-weight:600;letter-spacing:0.01em;color:var(--text-light);}
+  .display{font-family:var(--display);letter-spacing:0.01em;text-transform:uppercase;line-height:0.92;}
+
+  /* ---------- Scroll belt progress bar (signature element) ---------- */
+  .belt-progress{
+    position:fixed;top:0;left:0;width:100%;height:4px;
+    background:var(--sumi-3);
+    z-index:999;
+    display:flex;
+  }
+  .belt-progress-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,
+      var(--belt-white) 0%, var(--belt-yellow) 16.6%, var(--belt-orange) 33.2%,
+      var(--belt-green) 49.8%, var(--belt-blue) 66.4%, var(--belt-purple) 83%, var(--belt-black) 100%);
+    transition:width 0.08s linear;
+    box-shadow:0 0 12px rgba(200,32,43,0.4);
+  }
+
+  /* ---------- Header ---------- */
+  header{
+    position:fixed;top:4px;left:0;width:100%;z-index:900;
+    background:rgba(10,10,11,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1180px;margin:0 auto;
+  }
+  .logo{
+    display:flex;flex-direction:column;line-height:1;
+  }
+  .logo-main{font-family:var(--display);font-size:22px;letter-spacing:0.03em;color:var(--text-light);}
+  .logo-sub{font-family:var(--mono);font-size:9px;letter-spacing:0.22em;color:var(--hinomaru);text-transform:uppercase;margin-top:3px;}
+  nav.links{display:flex;gap:32px;}
+  nav.links a{
+    font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:0.04em;
+    color:var(--text-muted);transition:color 0.2s;
+  }
+  nav.links a:hover{color:var(--text-light);}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:0.05em;
+    padding:13px 26px;border-radius:2px;transition:all 0.2s;white-space:nowrap;
+  }
+  .btn-primary{
+    background:var(--hinomaru);color:#fff;
+    box-shadow:0 4px 20px rgba(200,32,43,0.35);
+  }
+  .btn-primary:hover{background:var(--hinomaru-deep);transform:translateY(-1px);}
+  .btn-ghost{
+    border:1px solid var(--line);color:var(--text-light);
+  }
+  .btn-ghost:hover{border-color:var(--text-muted);}
+  .btn-light{background:var(--washi);color:var(--text-dark);}
+  .btn-light:hover{background:var(--washi-2);}
+
+  .menu-toggle{display:none;flex-direction:column;gap:5px;}
+  .menu-toggle span{width:24px;height:2px;background:var(--text-light);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;
+    padding:170px 0 110px;
+    overflow:hidden;
+    background:
+      radial-gradient(ellipse 900px 500px at 82% -10%, rgba(200,32,43,0.22), transparent 60%),
+      var(--sumi);
+  }
+  .hero-sun{
+    position:absolute;top:-120px;right:-120px;width:520px;height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle at 40% 35%, var(--hinomaru), var(--hinomaru-deep) 60%, transparent 72%);
+    opacity:0.5;filter:blur(2px);
+    animation:pulse-sun 6s ease-in-out infinite;
+  }
+  @keyframes pulse-sun{0%,100%{opacity:0.42;}50%{opacity:0.6;}}
+  .hero-grid{
+    display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;
+    position:relative;z-index:2;
+  }
+  .hero h1{
+    font-size:clamp(42px,5.6vw,74px);
+    margin:20px 0 22px;
+  }
+  .hero h1 .accent{color:var(--hinomaru);}
+  .hero p.lead{
+    font-size:18px;color:var(--text-muted);max-width:520px;margin-bottom:34px;
+  }
+  .hero-cta-row{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px;}
+  .trust-strip{
+    display:flex;flex-wrap:wrap;gap:26px;
+    padding-top:28px;border-top:1px solid var(--line);
+  }
+  .trust-item{display:flex;align-items:center;gap:10px;font-family:var(--head);font-size:13px;letter-spacing:0.02em;color:var(--text-muted);text-transform:uppercase;}
+  .trust-item .dot{width:6px;height:6px;border-radius:50%;background:var(--hinomaru);flex-shrink:0;}
+
+  .hero-visual{
+    position:relative;
+    aspect-ratio:3/4;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .hero-visual{overflow:hidden;border:1px solid var(--line);border-radius:2px;position:relative;}
+  .hero-visual img{width:100%;height:100%;object-fit:cover;display:block;}
+  .hero-visual-tag{
+    position:absolute;bottom:0;left:0;right:0;
+    background:linear-gradient(0deg,rgba(10,10,11,0.85),transparent);
+    padding:18px 16px 12px;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;color:var(--washi);text-transform:uppercase;
+  }
+
+
+  /* ---------- Belt journey section ---------- */
+  .journey{
+    padding:90px 0 100px;background:var(--sumi-2);
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .journey-head{text-align:center;max-width:640px;margin:0 auto 60px;}
+  .journey-head h2{font-size:clamp(30px,4vw,44px);margin-top:14px;}
+  .journey-head p{color:var(--text-muted);margin-top:16px;font-size:16px;}
+  .belt-track{
+    display:flex;align-items:flex-end;justify-content:space-between;
+    gap:6px;position:relative;padding-top:10px;
+  }
+  .belt-track::before{
+    content:'';position:absolute;top:19px;left:0;right:0;height:2px;
+    background:var(--line);z-index:0;
+  }
+  .belt-stop{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:16px;
+    position:relative;z-index:1;
+    opacity:0;transform:translateY(16px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .belt-stop.in-view{opacity:1;transform:translateY(0);}
+  .belt-swatch{
+    width:38px;height:38px;border-radius:50%;
+    border:3px solid var(--sumi-2);
+    box-shadow:0 0 0 2px var(--line);
+  }
+  .belt-stop .belt-label{font-family:var(--head);font-size:12px;text-transform:uppercase;letter-spacing:0.03em;color:var(--text-light);text-align:center;}
+  .belt-stop .belt-meaning{font-family:var(--mono);font-size:11px;color:var(--text-muted);text-align:center;max-width:110px;}
+
+  /* ---------- Benefits ---------- */
+  .section{padding:100px 0;}
+  .section-head{max-width:600px;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(30px,4vw,46px);margin-top:14px;}
+  .section-head p{color:var(--text-muted);margin-top:16px;font-size:16px;}
+
+  .benefits-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .benefit-card{
+    background:var(--sumi);padding:38px 32px;
+    transition:background 0.25s;
+  }
+  .benefit-card:hover{background:var(--sumi-2);}
+  .benefit-num{font-family:var(--mono);font-size:12px;color:var(--hinomaru);letter-spacing:0.1em;}
+  .benefit-card h3{font-size:21px;margin:16px 0 12px;}
+  .benefit-card p{color:var(--text-muted);font-size:14.5px;}
+  .benefit-icon{width:36px;height:36px;margin-bottom:6px;}
+
+  /* ---------- About / Sensei ---------- */
+  .about{background:var(--washi);color:var(--text-dark);}
+  .about .eyebrow{color:var(--hinomaru-deep);}
+  .about .eyebrow::before{background:var(--hinomaru-deep);}
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:70px;align-items:center;}
+  .about h2{color:var(--text-dark);font-size:clamp(30px,4vw,44px);margin:14px 0 22px;}
+  .about p{color:#4a4640;font-size:16px;margin-bottom:16px;max-width:520px;}
+  .about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:36px;border-top:1px solid rgba(26,24,21,0.15);padding-top:28px;}
+  .stat-num{font-family:var(--display);font-size:44px;color:var(--hinomaru-deep);line-height:1;}
+  .stat-label{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.06em;color:#6b665d;margin-top:8px;}
+  .about-visual{
+    aspect-ratio:4/5;border-radius:2px;overflow:hidden;position:relative;
+    background:linear-gradient(160deg,var(--sumi),var(--sumi-2));
+  }
+  .about-visual img{width:100%;height:100%;object-fit:cover;display:block;}
+
+
+  /* ---------- Turmas ---------- */
+  .turmas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;}
+  .turma-card{
+    background:var(--sumi-2);border:1px solid var(--line);padding:36px;
+    position:relative;overflow:hidden;
+  }
+  .turma-card::before{
+    content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:var(--hinomaru);
+  }
+  .turma-age{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:0.06em;text-transform:uppercase;}
+  .turma-card h3{font-size:26px;margin:12px 0 14px;}
+  .turma-card ul{margin-top:18px;display:flex;flex-direction:column;gap:10px;}
+  .turma-card li{font-size:14.5px;color:var(--text-muted);display:flex;gap:10px;}
+  .turma-card li::before{content:'⛩';color:var(--hinomaru);flex-shrink:0;}
+
+  /* ---------- Plans ---------- */
+  .plans{background:var(--sumi-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .plan-card{
+    background:var(--sumi);border:1px solid var(--line);padding:38px 30px;
+    display:flex;flex-direction:column;
+  }
+  .plan-card.featured{
+    background:linear-gradient(165deg,var(--sumi-3),var(--sumi));
+    border-color:var(--hinomaru);position:relative;transform:translateY(-10px);
+  }
+  .plan-badge{
+    position:absolute;top:-13px;left:30px;background:var(--hinomaru);color:#fff;
+    font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;
+    padding:5px 12px;
+  }
+  .plan-name{font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:0.06em;color:var(--text-muted);}
+  .plan-price{font-family:var(--display);font-size:52px;color:var(--text-light);margin:14px 0 2px;line-height:1;}
+  .plan-price span{font-family:var(--body);font-size:14px;color:var(--text-muted);font-weight:500;}
+  .plan-note{font-family:var(--mono);font-size:11px;color:var(--text-muted);margin-bottom:24px;}
+  .plan-card ul{flex:1;display:flex;flex-direction:column;gap:12px;margin-bottom:28px;}
+  .plan-card li{font-size:14.5px;color:#c8c4b8;display:flex;gap:10px;align-items:flex-start;}
+  .plan-card li::before{content:'✓';color:var(--hinomaru);font-weight:700;flex-shrink:0;}
+
+  /* ---------- Testimonials ---------- */
+  .testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .testi-card{background:var(--sumi-2);border:1px solid var(--line);padding:32px;}
+  .testi-stars{color:var(--gold);font-size:14px;letter-spacing:2px;margin-bottom:16px;}
+  .testi-card p{font-size:15px;color:#d6d2c6;margin-bottom:22px;}
+  .testi-who{display:flex;align-items:center;gap:12px;}
+  .testi-avatar{
+    width:40px;height:40px;border-radius:50%;
+    background:var(--sumi-3);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:var(--head);font-size:14px;color:var(--hinomaru);
+  }
+  .testi-name{font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:0.02em;}
+  .testi-role{font-family:var(--mono);font-size:11px;color:var(--text-muted);}
+
+  /* ---------- FAQ ---------- */
+  .faq-list{max-width:800px;}
+  .faq-item{border-bottom:1px solid var(--line);}
+  .faq-q{
+    width:100%;display:flex;justify-content:space-between;align-items:center;
+    padding:24px 4px;text-align:left;font-family:var(--head);font-size:17px;text-transform:uppercase;letter-spacing:0.01em;
+  }
+  .faq-q .plus{font-family:var(--body);font-size:22px;color:var(--hinomaru);transition:transform 0.25s;flex-shrink:0;margin-left:20px;}
+  .faq-item.open .plus{transform:rotate(45deg);}
+  .faq-a{max-height:0;overflow:hidden;transition:max-height 0.3s ease;}
+  .faq-a p{padding:0 4px 24px;color:var(--text-muted);font-size:15px;max-width:640px;}
+
+  /* ---------- Final CTA ---------- */
+  .final-cta{
+    background:linear-gradient(135deg,var(--hinomaru-deep),var(--hinomaru));
+    padding:90px 0;position:relative;overflow:hidden;
+  }
+  .final-cta::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 85% 20%, rgba(255,255,255,0.15), transparent 55%);
+  }
+  .final-cta-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr 0.9fr;gap:50px;align-items:center;}
+  .final-cta h2{color:#fff;font-size:clamp(32px,4.4vw,50px);}
+  .final-cta p{color:rgba(255,255,255,0.85);font-size:17px;margin-top:16px;max-width:460px;}
+  .final-cta .eyebrow{color:rgba(255,255,255,0.85);}
+  .final-cta .eyebrow::before{background:rgba(255,255,255,0.85);}
+
+  .lead-form{
+    background:var(--washi);padding:34px;border-radius:2px;
+  }
+  .lead-form h3{color:var(--text-dark);font-size:20px;margin-bottom:6px;}
+  .lead-form p.sub{color:#6b665d;font-size:13.5px;margin-bottom:22px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:0.05em;color:#6b665d;margin-bottom:6px;}
+  .field input,.field select{
+    width:100%;padding:12px 14px;border:1px solid rgba(26,24,21,0.18);
+    background:#fff;color:var(--text-dark);font-family:var(--body);font-size:14.5px;
+    border-radius:1px;
+  }
+  .field input:focus,.field select:focus{outline:2px solid var(--hinomaru-deep);outline-offset:1px;}
+  .lead-form .btn{width:100%;margin-top:6px;padding:15px;font-size:15px;}
+
+  /* ---------- Footer ---------- */
+  footer{padding:60px 0 30px;background:var(--sumi);border-top:1px solid var(--line);}
+  .footer-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:50px;margin-bottom:48px;}
+  footer h4{font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:0.05em;color:var(--text-light);margin-bottom:18px;}
+  footer p, footer a{color:var(--text-muted);font-size:14.5px;}
+  footer ul{display:flex;flex-direction:column;gap:10px;}
+  footer a:hover{color:var(--text-light);}
+  .map-embed{width:100%;height:170px;border:1px solid var(--line);filter:grayscale(1) invert(0.9) contrast(0.9);margin-top:16px;}
+  .footer-bottom{
+    border-top:1px solid var(--line);padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:var(--mono);font-size:12px;color:var(--text-muted);
+  }
+
+  /* ---------- Floating WhatsApp ---------- */
+  .float-wa{
+    position:fixed;bottom:24px;right:24px;z-index:800;
+    background:#25D366;width:58px;height:58px;border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 24px rgba(0,0,0,0.4);
+    transition:transform 0.2s;
+  }
+  .float-wa:hover{transform:scale(1.08);}
+
+  /* ---------- Gallery ---------- */
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .gallery-item{position:relative;overflow:hidden;border:1px solid var(--line);aspect-ratio:4/3;}
+  .gallery-item img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.5s ease;}
+  .gallery-item:hover img{transform:scale(1.05);}
+  .gallery-item figcaption{
+    position:absolute;left:0;right:0;bottom:0;
+    background:linear-gradient(0deg,rgba(10,10,11,0.92),transparent);
+    color:var(--text-light);font-family:var(--head);font-size:14px;letter-spacing:0.01em;
+    padding:20px 18px 14px;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease, transform 0.7s ease;}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:960px){
+    nav.links{display:none;}
+    .menu-toggle{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{max-width:340px;margin:0 auto;order:-1;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-visual{order:-1;max-width:380px;margin:0 auto;}
+    .benefits-grid{grid-template-columns:repeat(2,1fr);}
+    .turmas-grid{grid-template-columns:1fr;}
+    .plans-grid{grid-template-columns:1fr;}
+    .plan-card.featured{transform:none;}
+    .testi-grid{grid-template-columns:1fr;}
+    .final-cta-inner{grid-template-columns:1fr;}
+    .footer-grid{grid-template-columns:1fr;gap:36px;}
+    .gallery-grid{grid-template-columns:1fr;}
+    .belt-track{flex-wrap:wrap;row-gap:28px;}
+    .belt-track::before{display:none;}
+    .belt-stop{flex:1 1 30%;}
+  }
+  @media (max-width:600px){
+    .benefits-grid{grid-template-columns:1fr;}
+    .hero{padding:150px 0 80px;}
+    .about-stats{grid-template-columns:1fr;gap:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="belt-progress"><div class="belt-progress-fill" id="beltFill"></div></div>
+
+<header>
+  <div class="nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-main">MAIS ENERGIA</span>
+      <span class="logo-sub">Academia de Karatê · Palmas-TO</span>
+    </a>
+    <nav class="links">
+      <a href="#beneficios">Benefícios</a>
+      <a href="#turmas">Turmas</a>
+      <a href="#planos">Planos</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20agendar%20minha%20aula%20experimental%20gr%C3%A1tis%20de%20Karat%C3%AA." class="btn btn-primary" target="_blank" rel="noopener">Aula Grátis</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-sun" aria-hidden="true"></div>
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Academia de Karatê · 103 Norte, Palmas-TO</span>
+        <h1 class="display">Forje disciplina.<br>Conquiste <span class="accent">respeito.</span><br>Transforme-se.</h1>
+        <p class="lead">Karatê tradicional para crianças e adultos, com professores federados à FEKTO e alunos campeões estaduais e nacionais representando o Tocantins. Matrículas abertas na Mais Energia.</p>
+        <div class="hero-cta-row">
+          <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20agendar%20minha%20aula%20experimental%20gr%C3%A1tis%20de%20Karat%C3%AA." class="btn btn-primary" target="_blank" rel="noopener">Quero minha aula grátis →</a>
+          <a href="#planos" class="btn btn-ghost">Ver planos</a>
+        </div>
+        <div class="trust-strip">
+          <span class="trust-item"><span class="dot"></span>Federada à FEKTO</span>
+          <span class="trust-item"><span class="dot"></span>Atletas campeões estaduais e nacionais</span>
+          <span class="trust-item"><span class="dot"></span>Turmas infantil e adulto</span>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <img src="images/sensei-beach.jpg" alt="Sensei da Mais Energia treinando kata ao entardecer" loading="eager">
+        <div class="hero-visual-tag">空手道 · KARATÊ-DO TRADICIONAL</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BELT JOURNEY (signature element) -->
+  <section class="journey">
+    <div class="container">
+      <div class="journey-head reveal">
+        <span class="eyebrow">A jornada da faixa</span>
+        <h2>Cada faixa é uma etapa da sua evolução</h2>
+        <p>No karatê tradicional, a graduação conta uma história de esforço. Na Mais Energia, cada aluno percorre esse caminho com acompanhamento próximo, do primeiro "oss!" à faixa preta.</p>
+      </div>
+      <div class="belt-track">
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-white)"></div><span class="belt-label">Branca</span><span class="belt-meaning">Início · humildade</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-yellow)"></div><span class="belt-label">Amarela</span><span class="belt-meaning">Primeiros fundamentos</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-orange)"></div><span class="belt-label">Laranja</span><span class="belt-meaning">Energia · força</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-green)"></div><span class="belt-label">Verde</span><span class="belt-meaning">Crescimento técnico</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-blue)"></div><span class="belt-label">Azul</span><span class="belt-meaning">Confiança</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-purple)"></div><span class="belt-label">Roxa</span><span class="belt-meaning">Maturidade</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-brown)"></div><span class="belt-label">Marrom</span><span class="belt-meaning">Preparação final</span></div>
+        <div class="belt-stop"><div class="belt-swatch" style="background:var(--belt-black);box-shadow:0 0 0 2px var(--gold)"></div><span class="belt-label">Preta</span><span class="belt-meaning">Mestria · começo</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENEFITS -->
+  <section class="section" id="beneficios">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Por que karatê</span>
+        <h2>Mais do que golpes: formação para a vida</h2>
+        <p>O treino na Mais Energia trabalha corpo e mente. Veja o que seu filho — ou você — leva para fora do tatame.</p>
+      </div>
+      <div class="benefits-grid">
+        <div class="benefit-card reveal">
+          <span class="benefit-num">01</span>
+          <h3>Disciplina e foco</h3>
+          <p>Rotina de treino estruturada que melhora concentração, organização e desempenho escolar ou profissional.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="benefit-num">02</span>
+          <h3>Defesa pessoal real</h3>
+          <p>Técnicas tradicionais de Karatê-Do aplicadas a situações reais, com progressão segura por faixa etária.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="benefit-num">03</span>
+          <h3>Saúde e condicionamento</h3>
+          <p>Treinos que desenvolvem força, flexibilidade e resistência cardiovascular, do infantil ao adulto.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="benefit-num">04</span>
+          <h3>Combate ao bullying</h3>
+          <p>Autoconfiança e postura que ajudam crianças e adolescentes a se posicionarem sem precisar da violência.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="benefit-num">05</span>
+          <h3>Respeito e valores</h3>
+          <p>O código do Dojô Kun ensina respeito ao próximo, humildade e responsabilidade dentro e fora do tatame.</p>
+        </div>
+        <div class="benefit-card reveal">
+          <span class="benefit-num">06</span>
+          <h3>Comunidade de verdade</h3>
+          <p>Uma família de dojô que treina, viaja e comemora conquistas juntas em campeonatos estaduais e nacionais.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section about">
+    <div class="container about-grid">
+      <div class="about-visual reveal">
+        <img src="images/team-blackbelts.jpg" alt="Equipe de faixas-pretas da Mais Energia Academia" loading="lazy">
+      </div>
+      <div>
+        <span class="eyebrow">Nossa história</span>
+        <h2>Um dojô raiz, no coração de Palmas</h2>
+        <p>A Mais Energia Academia nasceu do compromisso com o Karatê-Do tradicional na 103 Norte. Somos federados à FEKTO (Federação de Karatê do Tocantins) e formamos atletas que já representaram o estado em competições estaduais e nacionais.</p>
+        <p>Aqui, cada aluno é tratado pelo nome — não por número de matrícula. Professores graduados acompanham de perto a evolução técnica e pessoal de cada faixa, do infantil ao adulto.</p>
+        <div class="about-stats">
+          <div>
+            <div class="stat-num">+900</div>
+            <div class="stat-label">Alunos já treinaram</div>
+          </div>
+          <div>
+            <div class="stat-num">FEKTO</div>
+            <div class="stat-label">Academia federada</div>
+          </div>
+          <div>
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Karatê tradicional</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TURMAS -->
+  <section class="section" id="turmas" style="background:var(--sumi-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Turmas</span>
+        <h2>Uma turma para cada fase da vida</h2>
+        <p>Treinos separados por idade e nível técnico, para que cada aluno evolua no ritmo certo.</p>
+      </div>
+      <div class="turmas-grid">
+        <div class="turma-card reveal">
+          <span class="turma-age">5 a 12 anos</span>
+          <h3>Karatê Infantil</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;">Aulas lúdicas que desenvolvem coordenação, disciplina e confiança — a base do karatê construída brincando.</p>
+          <ul>
+            <li>Fundamentos de kihon, kata e etiqueta do dojô</li>
+            <li>Foco em coordenação motora e disciplina</li>
+            <li>Turmas reduzidas por faixa etária</li>
+            <li>Graduações periódicas de faixa</li>
+          </ul>
+        </div>
+        <div class="turma-card reveal">
+          <span class="turma-age">13 anos em diante</span>
+          <h3>Karatê Adolescente e Adulto</h3>
+          <p style="color:var(--text-muted);font-size:14.5px;">Treino técnico completo — kihon, kata e kumitê — para quem busca defesa pessoal, competição ou condicionamento físico.</p>
+          <ul>
+            <li>Defesa pessoal aplicada</li>
+            <li>Preparação para competições estaduais e nacionais</li>
+            <li>Condicionamento físico completo</li>
+            <li>Turmas para iniciantes e graduados</li>
+          </ul>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:44px;">
+        <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20saber%20os%20hor%C3%A1rios%20das%20turmas%20de%20Karat%C3%AA." class="btn btn-primary" target="_blank" rel="noopener">Consultar horários no WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PLANS -->
+  <section class="section plans" id="planos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Planos</span>
+        <h2>Escolha seu caminho no tatame</h2>
+        <p>Planos flexíveis para famílias e alunos individuais. Valores abaixo são referência — confirme condições e desconto do mês no WhatsApp.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card reveal">
+          <span class="plan-name">Mensal</span>
+          <div class="plan-price">R$ 149<span>/mês</span></div>
+          <div class="plan-note">*valor de referência — confirme no WhatsApp</div>
+          <ul>
+            <li>2x por semana</li>
+            <li>Acesso a todas as aulas da faixa etária</li>
+            <li>Sem fidelidade</li>
+            <li>Avaliação de evolução técnica</li>
+          </ul>
+          <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20plano%20Mensal." class="btn btn-ghost" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+        <div class="plan-card featured reveal">
+          <span class="plan-badge">Mais escolhido</span>
+          <span class="plan-name">Trimestral</span>
+          <div class="plan-price">R$ 129<span>/mês</span></div>
+          <div class="plan-note">*valor de referência — confirme no WhatsApp</div>
+          <ul>
+            <li>3x por semana</li>
+            <li>Prioridade em turmas de competição</li>
+            <li>Uniforme com desconto especial</li>
+            <li>Acompanhamento próximo de graduação</li>
+            <li>Acesso a eventos e graduações internas</li>
+          </ul>
+          <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20plano%20Trimestral." class="btn btn-primary" target="_blank" rel="noopener">Quero este plano</a>
+        </div>
+        <div class="plan-card reveal">
+          <span class="plan-name">Família</span>
+          <div class="plan-price">Sob consulta</div>
+          <div class="plan-note">2 ou mais matrículas na mesma família</div>
+          <ul>
+            <li>Treinos ilimitados por semana</li>
+            <li>Desconto progressivo por matrícula</li>
+            <li>Turmas para pais e filhos</li>
+            <li>Condições especiais de uniforme</li>
+          </ul>
+          <a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20plano%20Fam%C3%ADlia." class="btn btn-ghost" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section" id="depoimentos">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Quem treina, recomenda</span>
+        <h2>Histórias de quem já é da família dojô</h2>
+        <p>Avaliações reais de alunos e pais da Mais Energia Academia.</p>
+      </div>
+      <div class="testi-grid">
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Melhor academia de Karatê de Palmas. Senseis extremamente qualificados e atenciosos, seja pra iniciação ou mesmo treinos em alto rendimento. Ambiente de profissionalismo com o toque de cuidado familiar."</p>
+          <div class="testi-who">
+            <div class="testi-avatar">G</div>
+            <div><div class="testi-name">Gustavo Andrade</div><div class="testi-role">Aluno</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Minha filha treina na academia há 10 anos. Desde que chegou, foi acolhida com amor, cuidado, respeito e, principalmente, profissionalismo. Além disso, criou uma rede incrível de amigos, super recomendo!"</p>
+          <div class="testi-who">
+            <div class="testi-avatar">E</div>
+            <div><div class="testi-name">Edisselma dos Santos Alecrim</div><div class="testi-role">Mãe de aluna · 10 anos de casa</div></div>
+          </div>
+        </div>
+        <div class="testi-card reveal">
+          <div class="testi-stars">★★★★★</div>
+          <p>"Pratica e ensina a filosofia do karatê, compromissada com o crescimento e desenvolvimento do aluno. Fomenta um ambiente familiar e de amizade. Além de possuir um investimento de mensalidade bem acessível. Indico fortemente."</p>
+          <div class="testi-who">
+            <div class="testi-avatar">L</div>
+            <div><div class="testi-name">Lucemir Malcher</div><div class="testi-role">Aluno</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" id="faq" style="background:var(--sumi-2);border-top:1px solid var(--line);">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Dúvidas frequentes</span>
+        <h2>Antes de começar sua jornada</h2>
+      </div>
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-q">Qual a idade mínima para começar? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Aceitamos crianças a partir de 5 anos na turma infantil. Não há limite máximo de idade para começar no karatê adulto.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Preciso ter experiência prévia? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Não. A maioria dos nossos alunos começa do zero, na faixa branca. O treino é progressivo e adaptado ao seu nível.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">O uniforme (kimono) está incluso no plano? <span class="plus">+</span></button>
+          <div class="faq-a"><p>O uniforme é vendido à parte, com condições especiais para alunos matriculados. Consulte valores atualizados no WhatsApp.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Quais os dias e horários das aulas? <span class="plus">+</span></button>
+          <div class="faq-a"><p>Temos turmas em diferentes horários para infantil e adulto ao longo da semana. Envie sua idade e disponibilidade no WhatsApp que te passamos a grade completa.</p></div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-q">Posso cancelar quando quiser? <span class="plus">+</span></button>
+          <div class="faq-a"><p>O plano mensal não tem fidelidade. Planos trimestrais e familiares têm condições específicas, detalhadas na hora da matrícula.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="section gallery">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="eyebrow">Dentro do dojô</span>
+        <h2>O dia a dia da nossa família de karatê</h2>
+        <p>Graduações, treinos e conquistas — cada faixa entregue é fruto de disciplina e trabalho em equipe.</p>
+      </div>
+      <div class="gallery-grid">
+        <figure class="gallery-item reveal">
+          <img src="images/kids-graduation.jpg" alt="Alunos infantis recebendo certificado de graduação de faixa" loading="lazy">
+          <figcaption>Dia de graduação: cada faixa nova é comemorada com a turma toda.</figcaption>
+        </figure>
+        <figure class="gallery-item reveal">
+          <img src="images/kids-class.jpg" alt="Turma infantil enfileirada durante o treino de Karatê" loading="lazy">
+          <figcaption>Disciplina desde os primeiros minutos de aula — respeito ao sensei e aos colegas.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="final-cta">
+    <div class="container final-cta-inner">
+      <div class="reveal">
+        <span class="eyebrow">Comece hoje</span>
+        <h2 class="display">Sua primeira aula é por nossa conta.</h2>
+        <p>Agende uma aula experimental gratuita, sem compromisso, e sinta na pele a diferença de treinar num dojô de verdade.</p>
+      </div>
+      <form class="lead-form reveal" id="leadForm">
+        <h3>Quero minha aula experimental</h3>
+        <p class="sub">Preencha e fale direto com a gente no WhatsApp.</p>
+        <div class="field">
+          <label for="fname">Seu nome</label>
+          <input type="text" id="fname" placeholder="Nome completo" required>
+        </div>
+        <div class="field">
+          <label for="fphone">WhatsApp</label>
+          <input type="tel" id="fphone" placeholder="(63) 9 9999-9999" required>
+        </div>
+        <div class="field">
+          <label for="fturma">Turma de interesse</label>
+          <select id="fturma">
+            <option>Infantil (5 a 12 anos)</option>
+            <option>Adolescente / Adulto (13+)</option>
+            <option>Ainda não sei</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar e falar no WhatsApp</button>
+      </form>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h4>Mais Energia Academia</h4>
+        <p style="max-width:320px;">Academia de Karatê tradicional em Palmas-TO, federada à FEKTO. Turmas infantil e adulto, formando disciplina e respeito desde a primeira aula.</p>
+        <iframe class="map-embed" loading="lazy" src="https://www.google.com/maps?q=103+Norte+Rua+7+Lote+36+Palmas+TO&output=embed" title="Localização da Mais Energia Academia"></iframe>
+      </div>
+      <div>
+        <h4>Contato</h4>
+        <ul>
+          <li>103 Norte, Rua 07, Lote 36 — Palmas, TO</li>
+          <li><a href="https://wa.me/5563984680556" target="_blank" rel="noopener">(63) 98468-0556</a></li>
+          <li><a href="https://www.instagram.com/maisenergiaacademia/" target="_blank" rel="noopener">@maisenergiaacademia</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="#beneficios">Benefícios</a></li>
+          <li><a href="#turmas">Turmas</a></li>
+          <li><a href="#planos">Planos</a></li>
+          <li><a href="#faq">Dúvidas frequentes</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Mais Energia Academia de Karatê — Palmas, TO</span>
+      <span>Federada à FEKTO · Karatê-Do Tradicional</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5563984680556?text=Ol%C3%A1!%20Quero%20agendar%20minha%20aula%20experimental%20gr%C3%A1tis%20de%20Karat%C3%AA." class="float-wa" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.6.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.5.1-.2 0-.4 0-.5-.1-.1-.6-1.4-.8-1.9-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s.9 2.4 1 2.6c.1.2 1.8 2.8 4.4 3.9.6.3 1.1.4 1.5.5.6.2 1.2.2 1.6.1.5-.1 1.7-.7 1.9-1.3.2-.6.2-1.2.2-1.3-.1-.1-.3-.2-.6-.3z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.6 1.4 5.1L2 22l5-1.3c1.4.8 3.1 1.2 4.9 1.2 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.1.8.8-3-.2-.3C4 14.9 3.6 13.5 3.6 12c0-4.6 3.8-8.4 8.4-8.4s8.4 3.8 8.4 8.4-3.8 8.4-8.4 8.4z"/></svg>
+</a>
+
+<script>
+  // Belt scroll progress
+  const beltFill = document.getElementById('beltFill');
+  function updateBelt(){
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    beltFill.style.width = scrolled + '%';
+  }
+  document.addEventListener('scroll', updateBelt);
+  updateBelt();
+
+  // Mobile menu
+  const toggle = document.getElementById('menuToggle');
+  const links = document.querySelector('nav.links');
+  toggle.addEventListener('click', () => {
+    const open = links.style.display === 'flex';
+    links.style.cssText = open ? '' : 'display:flex;flex-direction:column;position:fixed;top:64px;right:24px;background:#151517;border:1px solid rgba(239,234,223,0.12);padding:20px;gap:16px;z-index:950;';
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal, .belt-stop');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in-view'); } });
+  }, {threshold:0.15});
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => { i.classList.remove('open'); i.querySelector('.faq-a').style.maxHeight = null; });
+      if(!isOpen){ item.classList.add('open'); a.style.maxHeight = a.scrollHeight + 'px'; }
+    });
+  });
+
+  // Lead form -> WhatsApp
+  document.getElementById('leadForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('fphone').value.trim();
+    const turma = document.getElementById('fturma').value;
+    const msg = `Olá! Meu nome é ${name}. Meu WhatsApp é ${phone}. Tenho interesse na turma: ${turma}. Quero agendar minha aula experimental grátis!`;
+    window.open('https://wa.me/5563984680556?text=' + encodeURIComponent(msg), '_blank');
+  });
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
